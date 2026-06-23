@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --color-blue: #94eaff;
