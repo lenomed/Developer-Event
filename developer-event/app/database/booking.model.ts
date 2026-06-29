@@ -59,6 +59,21 @@ bookingSchema.pre('save', async function () {
 bookingSchema.index({ eventId: 1 });
 
 /**
+ * Create compound index for common queries (event bookings by date)
+ */
+bookingSchema.index({ eventId: 1, createdAt: 1 });
+
+/**
+ * Create index on email for user booking lookups
+ */
+bookingSchema.index({ email: 1 });
+
+/**
+ * Enforce one booking per event per email (prevent duplicate bookings)
+ */
+bookingSchema.index({ eventId: 1, email: 1 }, { unique: true, name: 'unique_event_email' });
+
+/**
  * Booking model exported with TypeScript typing
  */
 const Booking: Model<IBooking> =
