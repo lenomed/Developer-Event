@@ -29,8 +29,9 @@ if (!global.mongoose) {
 
 /**
  * Connect to MongoDB using Mongoose
+ * Defers MONGODB_URI validation to connection time (not import time)
  * @returns Promise that resolves to the Mongoose instance
- * @throws Error if MONGODB_URI is not defined
+ * @throws Error if MONGODB_URI is not defined or connection fails
  */
 export async function connectDB(): Promise<Mongoose> {
   // Return cached connection if available
@@ -43,7 +44,7 @@ export async function connectDB(): Promise<Mongoose> {
     return cached.promise;
   }
 
-  // Validate MongoDB URI is configured
+  // Validate MongoDB URI only at connection time
   const mongodbUri = process.env.MONGODB_URI;
   if (!mongodbUri) {
     throw new Error(
@@ -82,6 +83,5 @@ export async function disconnectDB(): Promise<void> {
     cached.promise = null;
   }
 }
-
 
 export default connectDB;
