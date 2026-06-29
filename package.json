@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/node": "^26.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "animate.css": "^4.1.1",
@@ -9,6 +10,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
+    "mongoose": "^9.7.3",
     "posthog-js": "^1.393.2"
   }
 }
